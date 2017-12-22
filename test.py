@@ -6,7 +6,11 @@ import sys
 import os
 from relaytest import setpins, relayon
 
+# For printing to system console when using multiple threads.
+def consoleprint(string):
+    os.system("syslog -s -l error \" something " + str(string) + "\"")
 """
+
 print(mcp3008.readadc(1))
 setpins()
 relayon(9,0.3)
@@ -18,32 +22,33 @@ time.sleep(0.3)
 """
 
 class relay:
-    pin = None
-    on = False
+    pin
+    on
 
-    def __init__(self,pin,on):
+    def __init__(self, pin = None, on = False):
         self.pin = pin
         self.on = on
 
     def turn(on):
         self.on = on
 
-    while True:
-        if on==False:
-            consoleprint( str(pin) + " Im out")
-            break
-        print(str(pin) + " im on")
-        time.sleep(0.1)
+    def loop()
+        while True:
+            if on is False:
+                consoleprint(str(pin) + " Im out")
+                break
+            consoleprint(str(pin) + " im on")
+            time.sleep(0.1)
+
+relay1 = relay(0,True)
 
 
-# For printing to system console when using multiple threads.
-def consoleprint(string):
-    os.system("syslog -s -l error \" something " + str(string) + "\"")
 
-consoleprint(123)
+
+
 
 a=[]
-
+"""
 def heron(aoeu):
     global a
     for i in range(0, 5):
@@ -59,3 +64,6 @@ for i in range(5):
     t.start()
 time.sleep(1)
 print(a)
+
+
+"""
