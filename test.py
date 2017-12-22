@@ -4,7 +4,7 @@ import time
 import mcp3008
 import sys
 import os
-from relaytest import setpins, relayon
+#from relaytest import setpins, relayon
 
 # For printing to system console when using multiple threads.
 def consoleprint(string):
@@ -22,26 +22,31 @@ time.sleep(0.3)
 """
 
 class relay:
-    pin
-    on
 
-    def __init__(self, pin = None, on = False):
+    pin = None
+    on = False
+    def __init__(self, pin = None): #, on = False):
         self.pin = pin
+        #self.on = on
+        #self.turn(on)
+
+    def turn(self, on):
+        if self.on!=on==True:
+            self.on = on
+            self.loop()
         self.on = on
 
-    def turn(on):
-        self.on = on
-
-    def loop()
+    def loop(self):
+        print("in loop")
         while True:
-            if on is False:
-                consoleprint(str(pin) + " Im out")
+            if self.on is False:
+                consoleprint(str(self.pin) + " Im out")
                 break
-            consoleprint(str(pin) + " im on")
+            consoleprint(str(self.pin) + " im on")
             time.sleep(0.1)
 
-relay1 = relay(0,True)
-
+relay1 = relay(0,)
+relay1.turn(True)
 
 
 
