@@ -2,7 +2,7 @@
 import RPi.GPIO as GPIO
 #from EmulatorGUI import GPIO
 import time
-def setpins(pinList = [ 14 , 15 , 18 , 23 , 24 , 25 , 8 , 7, 12 , 16 , 20 , 21 , 2 , 3 , 4 , 17 , 27 , 22 , 10 , 9 , 11 , 5 , 6 , 13 , 19 , 26 ]):
+def setpins(pinList = [ 2, 14 , 15 , 18 , 23 , 24 , 25 , 8 , 7, 12 , 16 , 20 , 21 , 2 , 3 , 4 , 17 , 27 , 22 , 10 , 9 , 11 , 5 , 6 , 13 , 19 , 26 ]):
     GPIO.setmode(GPIO.BCM)
 
     # init list with pin numbers
@@ -18,7 +18,7 @@ def setpins(pinList = [ 14 , 15 , 18 , 23 , 24 , 25 , 8 , 7, 12 , 16 , 20 , 21 ,
 # time to sleep between operations in the main loop
 
 
-def relayon(relayidx=0, sec=1, pinList = [ 14 , 15 , 18 , 23 , 24 , 25 , 8 , 7, 12 , 16 , 20 , 21 , 2 , 3 , 4 , 17 , 27 , 22 , 10 , 9 , 11 , 5 , 6 , 13 , 19 , 26 ]):
+def relayon(relayidx=0, sec=1, pinList = [ 2, 14 , 15 , 18 , 23 , 24 , 25 , 8 , 7, 12 , 16 , 20 , 21 , 2 , 3 , 4 , 17 , 27 , 22 , 10 , 9 , 11 , 5 , 6 , 13 , 19 , 26 ]):
     try:
         GPIO.output(pinList[relayidx], GPIO.LOW)
         print ("ONE")
@@ -29,8 +29,8 @@ def relayon(relayidx=0, sec=1, pinList = [ 14 , 15 , 18 , 23 , 24 , 25 , 8 , 7, 
         # Reset GPIO settings
         GPIO.cleanup()
 #
-#setpins()
-#relayon()
+setpins()
+relayon(0)
 #GPIO.cleanup()
 
 """

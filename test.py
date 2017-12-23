@@ -20,22 +20,22 @@ time.sleep(0.3)
 relayon(9,0.3)
 time.sleep(0.3)
 """
-
-class relay:
+# Relay function. Should be started in thread in relayControll.
+class Relay:
 
     pin = None
     on = False
-    def __init__(self, pin = None): #, on = False):
+    def __init__(self, pin = None):
         self.pin = pin
-        #self.on = on
-        #self.turn(on)
 
+    # Turn on relay#
     def turn(self, on):
         if self.on!=on==True:
             self.on = on
             self.loop()
         self.on = on
-
+        return "hej"
+    # Loop running untill turned off from other thread.
     def loop(self):
         print("in loop")
         while True:
@@ -45,30 +45,45 @@ class relay:
             consoleprint(str(self.pin) + " im on")
             time.sleep(0.1)
 
-relay1 = relay(0,)
-relay1.turn(True)
+
+class RelayControll:
+
+    pinlist = None
+    thread = None
+    relays = []
+
+    def __init__(self, pinlist = [2, 3, 4, 17, 27, 22, 5, 6, 13, 19, 26, 14, 15, 18, 23, 24, 25, 7, 12, 16, 20, 21], relaycount = 16): #BCM pins. Excluding pins used for SPI0.
+        self.pinlist = pinlist[0: relaycount]
+        for pin in pinlist:
+            self.relays.append(Relay(pin)) #Adding relays to a list.
+
+    def turnOnRelay(self, relaynum):
+        self.thread = threading.Thread(target=self.relays[relaynum].turn, args=(True,))
+        self.thread.start()
+
+    def turnOffRelay(self, relaynum):
+        self.thread = threading.Thread(target=self.relays[relaynum].turn, args=(False,))
+        self.thread.start()
 
 
 
+controll = RelayControll()
+controll.turnOnRelay(0)
+time.sleep(2)
+print("turinge off")
+controll.turnOffRelay(0)
 
 
-a=[]
 """
-def heron(aoeu):
-    global a
-    for i in range(0, 5):
-        a.append(aoeu)
-        time.sleep(aoeu)
-
-#start_new_thread(heron,(0.03,))
-#start_new_thread(heron,(0.1,))
-threads = []
-for i in range(5):
-    t = threading.Thread(target=heron, args=(0.1*i,))
-    threads.append(t)
-    t.start()
+relay1 = Relay(0,)
+relay2 = Relay(0,)
+t1 = threading.Thread(target=relay1.turn, args=(True,))
+t1.start()
 time.sleep(1)
-print(a)
-
+t1 = threading.Thread(target=relay1.turn, args=(False,))
+print(threading.activeCount())
+t1.start()
+print("slutet")
 
 """
+
