@@ -1,0 +1,2 @@
+RPi==0.1.0
+websockets==4.0.1

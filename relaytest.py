@@ -1,8 +1,14 @@
 #!/usr/bin/python
 import RPi.GPIO as GPIO
-#from EmulatorGUI import GPIO
+# from EmulatorGUI import GPIO
 import time
-def setpins(pinList = [ 2, 14 , 15 , 18 , 23 , 24 , 25 , 8 , 7, 12 , 16 , 20 , 21 , 2 , 3 , 4 , 17 , 27 , 22 , 10 , 9 , 11 , 5 , 6 , 13 , 19 , 26 ]):
+
+
+pinList = [2, 3, 4, 17, 27, 22, 5, 6, 13, 19, 26, 14, 15, 18, 23, 24, 25, 7, 12, 16, 20, 21]
+
+def setpins(pinList):
+
+
     GPIO.setmode(GPIO.BCM)
 
     # init list with pin numbers
@@ -11,26 +17,27 @@ def setpins(pinList = [ 2, 14 , 15 , 18 , 23 , 24 , 25 , 8 , 7, 12 , 16 , 20 , 2
     # loop through pins and set mode and state to 'low'
 
     for i in pinList:
-        print(i)
+        #print(i)
         GPIO.setup(i, GPIO.OUT)
         GPIO.output(i, GPIO.HIGH)
 
 # time to sleep between operations in the main loop
 
 
-def relayon(relayidx=0, sec=1, pinList = [ 2, 14 , 15 , 18 , 23 , 24 , 25 , 8 , 7, 12 , 16 , 20 , 21 , 2 , 3 , 4 , 17 , 27 , 22 , 10 , 9 , 11 , 5 , 6 , 13 , 19 , 26 ]):
+def relayon(pinList, relayidx=0, sec=1):
     try:
-        GPIO.output(pinList[relayidx], GPIO.LOW)
-        print ("ONE")
-        time.sleep(sec);
-        GPIO.output(pinList[relayidx], GPIO.HIGH)
+        while True:
+            GPIO.output(pinList[relayidx], GPIO.LOW)
+            print ("ONE")
+            time.sleep(sec);
+            GPIO.output(pinList[relayidx], GPIO.HIGH)
     except KeyboardInterrupt:
         print ("Quit")
         # Reset GPIO settings
         GPIO.cleanup()
 #
-setpins()
-relayon(0)
+setpins(pinList=pinList)
+relayon(pinList=pinList)
 #GPIO.cleanup()
 
 """
