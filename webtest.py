@@ -66,7 +66,7 @@ try:
         message = json.dumps(config.status)
         return message
 
-    start_server = websockets.serve(handler, '192.168.2.100', 9998)
+    start_server = websockets.serve(handler, 'laser.xkz.se', 9998)
 
     asyncio.get_event_loop().run_until_complete(start_server)
     asyncio.get_event_loop().run_forever()
