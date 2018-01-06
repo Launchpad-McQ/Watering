@@ -7,7 +7,6 @@ import RPi.GPIO as GPIO
 # from relaytest import setpins, relayon
 import config
 
-print(config.status)
 pinlist=[2, 3, 4, 17, 27, 22, 5, 6, 13, 19, 26, 14, 15, 18, 23, 24, 25, 7, 12, 16, 20, 21]
 relaycount = 16
 

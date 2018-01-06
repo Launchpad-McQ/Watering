@@ -3,6 +3,9 @@ import websockets
 import json
 import relay
 import config
+import time
+import threading
+import mcp3008
 
 relaycount = 16
 sensorcount = 16
@@ -22,7 +25,18 @@ controller.turnOnRelay(0,5)
 time.sleep(2)
 controller.cleanup()"""
 
+def get_reading():
+    while True:
+        for i in range(0,config.numchip):
+            for j in range(0,config.numinputs):
+                config.reading_arr[i*config.numinputs+j] = mcp3008.readadc(j,i)
+        config.status["sensorval"] = config.reading_arr
+        time.sleep(0.1)
+
 try:
+    thread= threading.Thread(target=get_reading, args=())
+    thread.start()
+
     async def handler(websocket, path):
         consumer_task = asyncio.ensure_future(consumer_handler(websocket))
         producer_task = asyncio.ensure_future(producer_handler(websocket))
