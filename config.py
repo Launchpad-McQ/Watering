@@ -11,4 +11,5 @@ reading_arr = [0]*numchip*numinputs
 # Status of sensors and relays
 relayon = [False] * relaycount
 sensorval = [0] * sensorcount
-status = {"relayon": relayon, "sensorval": sensorval}
+duration = 2
+status = {"relayon": relayon, "sensorval": sensorval, "duration": duration}

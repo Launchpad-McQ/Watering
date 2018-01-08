@@ -59,7 +59,7 @@ try:
             await asyncio.sleep(0.1)
 
     async def consumer(message):
-        relaynum = int(message)
+        relaynum = int(message["relaynum"])
         controller.turnOnRelay(relaynum,2)
 
     async def producer():
