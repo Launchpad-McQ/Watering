@@ -85,7 +85,6 @@ function myFunction() {
          }
 function dropmenu() {
     var x = document.getElementById("mySelect").value;
-    document.getElementById("demo").innerHTML = x;
     message.duration = x;
     message.turn = false;
     ws.send(JSON.stringify(message));
@@ -126,7 +125,6 @@ Relay on time. (Time relay is turned on after click)
 
 
 
-<p id="demo"></p>
 
 
 
