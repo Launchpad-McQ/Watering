@@ -12,31 +12,32 @@
          {
             if ("WebSocket" in window)
             {
-               // Let us open a web socket
-               //ws = new WebSocket("ws://laser.xkz.se:9998");
-               ws = new WebSocket("ws://localhost:9998");
+                // Let us open a web socket
+                ws = new WebSocket("ws://laser.xkz.se:9998");
+                //ws = new WebSocket("ws://localhost:9998");
 				
-               // does thin when web socket is opened.
-               ws.onopen = function()
-               {
-               };
+                // does thin when web socket is opened.
+                ws.onopen = function()
+                {
+                };
                
-              ws.onmessage = function (event) {
+                ws.onmessage = function (event) {
                     state = JSON.parse(event.data);
                     message = {relaynum: 0, duration: state.duration, turn:
                         false};
+                    document.getElementById("mySelect").value = message.duration;
 
-    var elmnt = document.createElement("li");
-    var elmnt2 = document.createElement("li");
-    var content1 = document.createTextNode(state.relayon);
-    var content2 = document.createTextNode(state.sensorval);    
-    elmnt.appendChild(content1);
-    elmnt2.appendChild(content2);
-
-    var item = document.getElementById("myList");
-    item.replaceChild(elmnt, item.childNodes[0]);
-    item.replaceChild(elmnt2, item.childNodes[1]);
-            };
+                var elmnt = document.createElement("li");
+                var elmnt2 = document.createElement("li");
+                var content1 = document.createTextNode(state.relayon);
+                var content2 = document.createTextNode(state.sensorval);    
+                elmnt.appendChild(content1);
+                elmnt2.appendChild(content2);
+            
+                var item = document.getElementById("myList");
+                item.replaceChild(elmnt, item.childNodes[0]);
+                item.replaceChild(elmnt2, item.childNodes[1]);
+                };
 			
 				
 function myFunction() {
@@ -88,6 +89,7 @@ function dropmenu() {
     message.duration = x;
     message.turn = false;
     ws.send(JSON.stringify(message));
+    document.getElementById("mySelect").value = message.duration;
 }
       </script>
    </head>
@@ -114,7 +116,7 @@ function dropmenu() {
       
 <form onclick="dropmenu()">
 Relay on time. (Time relay is turned on after click)
-<select value="5" selected="5" id="mySelect">
+<select id="mySelect">
   <option value="2">2 Seconds</option>
   <option value="5">5 Seconds</option>
   <option value="10">10 Seconds</option>
