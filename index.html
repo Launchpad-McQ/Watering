@@ -5,24 +5,26 @@
       <script type="text/javascript">
         var ws;
         var state;
-        var message 
         // state.relayon and state.sensorval
+        var message;
 
          function WebSocketTest()
          {
             if ("WebSocket" in window)
             {
                // Let us open a web socket
-               ws = new WebSocket("ws://laser.xkz.se:9998");
+               //ws = new WebSocket("ws://laser.xkz.se:9998");
+               ws = new WebSocket("ws://localhost:9998");
 				
-               // does thing when web socket is opened.
+               // does thin when web socket is opened.
                ws.onopen = function()
                {
                };
                
               ws.onmessage = function (event) {
                     state = JSON.parse(event.data);
-                    message = {relaynum:0, duraion: state.duration}
+                    message = {relaynum: 0, duration: state.duration, turn:
+                        false};
 
     var elmnt = document.createElement("li");
     var elmnt2 = document.createElement("li");
@@ -74,16 +76,18 @@ function myFunction() {
          function Relay(relaynum)
          {
                   // Web Socket is connected, send data using send()
-             message.relaynum = relaynum
-                  ws.send(message);
+             message.relaynum = relaynum;
+             message.turn = true;
+             ws.send(JSON.stringify(message));
               
 
          }
 function dropmenu() {
     var x = document.getElementById("mySelect").value;
-    message.duration = x
-   ws.send(message);
     document.getElementById("demo").innerHTML = x;
+    message.duration = x;
+    message.turn = false;
+    ws.send(JSON.stringify(message));
 }
       </script>
    </head>
@@ -108,9 +112,9 @@ function dropmenu() {
          <button onclick="Relay(15)">Relay15</button>
       </div>
       
-<form>
+<form onclick="dropmenu()">
 Relay on time. (Time relay is turned on after click)
-<select id="mySelect">
+<select value="5" selected="5" id="mySelect">
   <option value="2">2 Seconds</option>
   <option value="5">5 Seconds</option>
   <option value="10">10 Seconds</option>
@@ -118,9 +122,7 @@ Relay on time. (Time relay is turned on after click)
 </select>
 </form>
 
-<p>Click the button to return the value of the selected fruit.</p>
 
-<button type="button" onclick="dropmenu()">Try it</button>
 
 <p id="demo"></p>
 

@@ -59,14 +59,18 @@ try:
             await asyncio.sleep(0.1)
 
     async def consumer(message):
+        message = json.loads(message)
         relaynum = int(message["relaynum"])
-        controller.turnOnRelay(relaynum,2)
+        config.status["duration"] = int(message["duration"])
+        if message["turn"] is True:
+            controller.turnOnRelay(relaynum,config.status["duration"])
 
     async def producer():
         message = json.dumps(config.status)
         return message
 
-    start_server = websockets.serve(handler, '192.168.2.100',9998)
+    start_server = websockets.serve(handler, '127.0.0.1',9998)
+    #start_server = websockets.serve(handler, '192.168.2.100',9998)
 
     asyncio.get_event_loop().run_until_complete(start_server)
     asyncio.get_event_loop().run_forever()
