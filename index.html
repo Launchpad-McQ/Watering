@@ -2,6 +2,8 @@
 <html>
    <head>
 	
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
       <script type="text/javascript">
         var ws;
         var state;
@@ -40,7 +42,7 @@
                 };
 			
 				
-function myFunction() {
+function Printingvalues() {
     elmnt = document.createElement("li");
     textnode = document.createTextNode("Water");
     content1 = document.createTextNode(state.relayon);
@@ -91,6 +93,49 @@ function dropmenu() {
     document.getElementById("mySelect").value = message.duration;
 }
       </script>
+
+      <script>
+ google.charts.load('current', {'packages':['gauge']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['1', 50],
+          ['2', 50],
+          ['3', 50]
+
+
+
+        ]);
+
+        var options = {
+          width: 400, height: 120,
+          redFrom: 90, redTo: 100,
+          yellowFrom:75, yellowTo: 90,
+          minorTicks: 5
+        };
+
+        var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+
+        setInterval(function() {
+          data.setValue(0, 1, Math.round(100*state.sensorval[0]/1023));
+          chart.draw(data, options);
+        }, 100);
+        setInterval(function() {
+          data.setValue(1, 1, Math.round(100*state.sensorval[1]/1023));
+          chart.draw(data, options);
+        }, 100);
+        setInterval(function() {
+          data.setValue(2, 1, Math.round(100*state.sensorval[2]/1023));
+          chart.draw(data, options);
+        }, 100);
+      }
+      </script>
+
    </head>
    <body onload="WebSocketTest();">
    
@@ -124,16 +169,9 @@ Relay on time. (Time relay is turned on after click)
 </form>
 
 
-
-
-
-
-
 <ul id="myList"><li>Coffee</li><li>Tea</li></ul>
 
-
-
-
+       <div id="chart_div" style="width: 400px; height: 120px;"></div>
 
    </body>
 </html>
