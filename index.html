@@ -124,8 +124,9 @@ function dropmenu() {
 
         var options = {
           width: 800, height: 240,
-          redFrom: 90, redTo: 100,
-          yellowFrom:75, yellowTo: 90,
+          redFrom: 80, redTo: 100,
+          yellowFrom:60, yellowTo: 80,
+          greenFrom: 40, greenTo: 60,
           minorTicks: 5
         };
 
@@ -136,11 +137,11 @@ function dropmenu() {
         setInterval(function() {
           data.setValue(0, 1, Math.round(100*state.sensorval[0]/1023));
           chart.draw(data, options);
-        }, 100);
+        }, 20);
         setInterval(function() {
           data.setValue(1, 1, Math.round(100*state.sensorval[1]/1023));
           chart.draw(data, options);
-        }, 100);
+        }, 50);
         setInterval(function() {
           data.setValue(2, 1, Math.round(100*state.sensorval[2]/1023));
           chart.draw(data, options);
