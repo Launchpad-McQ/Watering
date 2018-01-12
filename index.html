@@ -137,11 +137,11 @@ function dropmenu() {
         setInterval(function() {
           data.setValue(0, 1, Math.round(100*state.sensorval[0]/1023));
           chart.draw(data, options);
-        }, 20);
+        }, 1);
         setInterval(function() {
           data.setValue(1, 1, Math.round(100*state.sensorval[1]/1023));
           chart.draw(data, options);
-        }, 50);
+        }, 10);
         setInterval(function() {
           data.setValue(2, 1, Math.round(100*state.sensorval[2]/1023));
           chart.draw(data, options);
