@@ -1,217 +1,36 @@
 <!DOCTYPE HTML>
 <html>
    <head>
-	
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
 
-      <script type="text/javascript">
-        var ws;
-        var state;
-        // state.relayon and state.sensorval
-        var message;
-
-         function WebSocketTest()
-         {
-            if ("WebSocket" in window)
-            {
-                // Let us open a web socket
-                ws = new WebSocket("ws://laser.xkz.se:9998");
-                //ws = new WebSocket("ws://localhost:9998");
-				
-                // does this when web socket is opened.
-                ws.onopen = function()
-                {
-                };
-               
-                ws.onmessage = function (event) {
-                    state = JSON.parse(event.data);
-                    message = {relaynum: 0, duration: state.duration, turn:
-                        false};
-                    document.getElementById("mySelect").value = message.duration;
-
-                var elmnt = document.createElement("li");
-                //var elmnt2 = document.createElement("li");
-                var content1 = document.createTextNode(state.relayon);
-                //var content2 = document.createTextNode(state.sensorval);    
-                elmnt.appendChild(content1);
-                //elmnt2.appendChild(content2);
-            
-                var item = document.getElementById("myList");
-                item.replaceChild(elmnt, item.childNodes[0]);
-                //item.replaceChild(elmnt2, item.childNodes[1]);
-                };
-			
-				
-
-
-               ws.onclose = function()
-               { 
-                  // websocket is closed.
-                  alert("Connection is closed..."); 
-               };
-					
-               window.onbeforeunload = function(event) {
-                  socket.close();
-               };
-            }
-            
-            else
-            {
-               // The browser doesn't support WebSocket
-               alert("WebSocket NOT supported by your Browser!");
-            }
-         }
-         function Relay(relaynum)
-         {
-                  // Web Socket is connected, send data using send()
-             message.relaynum = relaynum;
-             message.turn = true;
-             ws.send(JSON.stringify(message));
-              
-
-         }
-function dropmenu() {
-    var x = document.getElementById("mySelect").value;
-    message.duration = x;
-    message.turn = false;
-    ws.send(JSON.stringify(message));
-    document.getElementById("mySelect").value = message.duration;
-}
-      </script>
-
-      <script>
- google.charts.load('current', {'packages':['gauge']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-
-        var data = google.visualization.arrayToDataTable([
-          ['Label', 'Value'],
-            ['1', 50],
-            ['2', 50],
-            ['3', 50],
-            ['4', 50],
-            ['5', 50],
-            ['6', 50],
-            ['7', 50],
-            ['8', 50],
-            ['9', 50],
-            ['10', 50],
-            ['11', 50],
-            ['12', 50],
-            ['13', 50],
-            ['14', 50],
-            ['15', 50],
-            ['16', 50]
-
-
-        ]);
-
-        var options = {
-          width: 800, height: 240,
-          redFrom: 80, redTo: 100,
-          yellowFrom:60, yellowTo: 80,
-          greenFrom: 40, greenTo: 60,
-          minorTicks: 5
-        };
-
-        var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
-
-        chart.draw(data, options);
-
-        setInterval(function() {
-          data.setValue(0, 1, Math.round(100*state.sensorval[0]/1023));
-          chart.draw(data, options);
-        }, 500);
-        setInterval(function() {
-          data.setValue(1, 1, Math.round(100*state.sensorval[1]/1023));
-          chart.draw(data, options);
-        }, 500);
-        setInterval(function() {
-          data.setValue(2, 1, Math.round(100*state.sensorval[2]/1023));
-          chart.draw(data, options);
-        }, 500);
-        setInterval(function() {
-          data.setValue(3, 1, Math.round(100*state.sensorval[3]/1023));
-          chart.draw(data, options);
-        }, 500);
-        setInterval(function() {
-          data.setValue(4, 1, Math.round(100*state.sensorval[4]/1023));
-          chart.draw(data, options);
-        }, 500);
-        setInterval(function() {
-          data.setValue(5, 1, Math.round(100*state.sensorval[5]/1023));
-          chart.draw(data, options);
-        }, 500);
-        setInterval(function() {
-          data.setValue(6, 1, Math.round(100*state.sensorval[6]/1023));
-          chart.draw(data, options);
-        }, 500);
-        setInterval(function() {
-          data.setValue(7, 1, Math.round(100*state.sensorval[7]/1023));
-          chart.draw(data, options);
-        }, 500);
-        setInterval(function() {
-          data.setValue(8, 1, Math.round(100*state.sensorval[8]/1023));
-          chart.draw(data, options);
-        }, 500);
-        setInterval(function() {
-          data.setValue(9, 1, Math.round(100*state.sensorval[9]/1023));
-          chart.draw(data, options);
-        }, 500);
-        setInterval(function() {
-          data.setValue(10, 1, Math.round(100*state.sensorval[10]/1023));
-          chart.draw(data, options);
-        }, 500);
-        setInterval(function() {
-          data.setValue(11, 1, Math.round(100*state.sensorval[11]/1023));
-          chart.draw(data, options);
-        }, 500);
-        setInterval(function() {
-          data.setValue(12, 1, Math.round(100*state.sensorval[12]/1023));
-          chart.draw(data, options);
-        }, 500);
-        setInterval(function() {
-          data.setValue(13, 1, Math.round(100*state.sensorval[13]/1023));
-          chart.draw(data, options);
-        }, 500);
-        setInterval(function() {
-          data.setValue(14, 1, Math.round(100*state.sensorval[14]/1023));
-          chart.draw(data, options);
-        }, 500);
-        setInterval(function() {
-          data.setValue(15, 1, Math.round(100*state.sensorval[15]/1023));
-          chart.draw(data, options);
-        }, 500);
-      }
-      </script>
 
    </head>
    <body onload="WebSocketTest();">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script  src="index.js"></script>
    
       <div id="sse">
-         <button onclick="Relay(0)">Relay0</button>
-         <button onclick="Relay(1)">Relay1</button>
-         <button onclick="Relay(2)">Relay2</button>
-         <button onclick="Relay(3)">Relay3</button>
-         <button onclick="Relay(4)">Relay4</button>
-         <button onclick="Relay(5)">Relay5</button>
-         <button onclick="Relay(6)">Relay6</button>
-         <button onclick="Relay(7)">Relay7</button>
-         <button onclick="Relay(8)">Relay8</button>
-         <button onclick="Relay(9)">Relay9</button>
-         <button onclick="Relay(10)">Relay10</button>
-         <button onclick="Relay(11)">Relay11</button>
-         <button onclick="Relay(12)">Relay12</button>
-         <button onclick="Relay(13)">Relay13</button>
-         <button onclick="Relay(14)">Relay14</button>
-         <button onclick="Relay(15)">Relay15</button>
+         <button class="button" onclick="Relay(0)">Relay0</button>
+         <button class="button" onclick="Relay(1)">Relay1</button>
+         <button class="button" onclick="Relay(2)">Relay2</button>
+         <button class="button" onclick="Relay(3)">Relay3</button>
+         <button class="button" onclick="Relay(4)">Relay4</button>
+         <button class="button" onclick="Relay(5)">Relay5</button>
+         <button class="button" onclick="Relay(6)">Relay6</button>
+         <button class="button" onclick="Relay(7)">Relay7</button>
+         <button class="button" onclick="Relay(8)">Relay8</button>
+         <button class="button" onclick="Relay(9)">Relay9</button>
+         <button class="button" onclick="Relay(10)">Relay10</button>
+         <button class="button" onclick="Relay(11)">Relay11</button>
+         <button class="button" onclick="Relay(12)">Relay12</button>
+         <button class="button" onclick="Relay(13)">Relay13</button>
+         <button class="button" onclick="Relay(14)">Relay14</button>
+         <button class="button" onclick="Relay(15)">Relay15</button>
       </div>
       
 <form onclick="dropmenu()">
 Relay on time. (Time relay is turned on after click)
 <select id="mySelect">
-    <optgroup disabled hidden></optgroup>
     <option value="2">2 Seconds</option>
     <option value="5">5 Seconds</option>
     <option value="10">10 Seconds</option>
@@ -220,10 +39,11 @@ Relay on time. (Time relay is turned on after click)
 </form>
 
 
-<ul id="myList"><li>Coffee</li></ul>
+<!--<ul id="myList"><li>Coffee</li></ul>-->
 
-<!--u<ul id="myList"><li>Coffee</li><li>Tea</li></ul>-->
-       <div id="chart_div" style="width: 800px; height: 240px;"></div>
+<ul id="myList"><li>Coffee</li><li>Tea</li></ul>
+<div id="container"></div>
+<div id="chart_div" style="width: 800px; height: 240px;"></div>
 
    </body>
 </html>
