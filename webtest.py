@@ -9,7 +9,7 @@ import mcp3008
 
 relaycount = 16
 sensorcount = 16
-pinlist = [2, 3, 4, 17, 27, 22, 5, 6, 13, 19, 26, 14, 15, 18, 23, 24, 25, 7, 12]
+pinlist = [2, 3, 17, 27, 22, 5, 6, 13, 19, 26, 14, 15, 18, 23, 24, 25, 7, 12]
 
 relayon = [False] * relaycount
 sensorval = [0] * sensorcount
