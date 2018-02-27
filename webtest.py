@@ -9,7 +9,7 @@ import mcp3008
 
 relaycount = 16
 sensorcount = 16
-pinlist = [2, 3, 4, 17, 27, 22, 5, 6, 13, 19, 26, 14, 15, 18, 23, 24, 25, 7, 12, 16, 20, 21]
+pinlist = [2, 3, 4, 17, 27, 22, 5, 6, 13, 19, 26, 14, 15, 18, 23, 24, 25, 7, 12]
 
 relayon = [False] * relaycount
 sensorval = [0] * sensorcount
@@ -39,7 +39,6 @@ try:
     thread.start()
 
     async def handler(websocket, path):
-        print("got thing")
         consumer_task = asyncio.ensure_future(consumer_handler(websocket))
         producer_task = asyncio.ensure_future(producer_handler(websocket))
         done, pending = await asyncio.wait(

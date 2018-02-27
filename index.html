@@ -8,26 +8,25 @@
    <body onload="WebSocketTest();">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script  src="index.js"></script>
-   
-      <div id="sse">
-         <button class="button" onclick="Relay(0)">Relay0</button>
-         <button class="button" onclick="Relay(1)">Relay1</button>
-         <button class="button" onclick="Relay(2)">Relay2</button>
-         <button class="button" onclick="Relay(3)">Relay3</button>
-         <button class="button" onclick="Relay(4)">Relay4</button>
-         <button class="button" onclick="Relay(5)">Relay5</button>
-         <button class="button" onclick="Relay(6)">Relay6</button>
-         <button class="button" onclick="Relay(7)">Relay7</button>
-         <button class="button" onclick="Relay(8)">Relay8</button>
-         <button class="button" onclick="Relay(9)">Relay9</button>
-         <button class="button" onclick="Relay(10)">Relay10</button>
-         <button class="button" onclick="Relay(11)">Relay11</button>
-         <button class="button" onclick="Relay(12)">Relay12</button>
-         <button class="button" onclick="Relay(13)">Relay13</button>
-         <button class="button" onclick="Relay(14)">Relay14</button>
-         <button class="button" onclick="Relay(15)">Relay15</button>
-      </div>
-      
+
+<script>
+function disableBtn() {
+    document.getElementById("myBtn").active= true;
+}
+
+function undisableBtn() {
+    document.getElementById("myBtn").disabled = false;
+}
+</script>
+
+<meta name="viewport" content="width=500, initial-scale=0.65, minimum-scale=0.65, maximum-scale=0.65">
+
+<div id="sse">
+    <button id="myBtn" class="button" onclick="disableBtn()">Relay0</button>
+
+</div>
+
+<!--
 <form onclick="dropmenu()">
 Relay on time. (Time relay is turned on after click)
 <select id="mySelect">
@@ -37,12 +36,323 @@ Relay on time. (Time relay is turned on after click)
     <option value="20">20 Seconds</option>
 </select>
 </form>
+-->
+
+<!-- This div hack is to workaround an iOS Safari issue
+that the menu cannot be closed by tapping anywhere else.
+You can remove it if you can live with the issue. -->
+<div style="-webkit-tap-highlight-color:rgba(0,0,0,0)" onclick="return true">
 
 
-<!--<ul id="myList"><li>Coffee</li></ul>-->
+<!-- The dropdown menu begins -->
+<div class="sample-menu-style dropdown-menu">
+  <span tabindex="0" onclick="return true"><span id="msg"></span> Seconds
+      duration.</span>
+  <div tabindex="0" onclick="return true"></div>
+  <ul>
+    <li><a href="#" onclick="sampleMenu(2)">2 seconds</a></li>
+    <li><a href="#" onclick="sampleMenu(5)">5 seconds</a></li>
+    <li><a href="#" onclick="sampleMenu(10)">10 seconds</a></li>
+    <li><a href="#" onclick="sampleMenu(20)">20 seconds</a></li>
+  </ul>
+</div>
+<!-- End of the dropdown menu -->
+</div>
 
 <ul id="myList"><li>Coffee</li><li>Tea</li></ul>
-<div id="chart_div" style="width: 800px; height: 240px;"></div>
+<!--
+<table align="center">
+    <tr>
+        <td>
+<button class="button" onclick="Relay(14)">Relay14</button>
+        </td>
+        <td>
+<button class="button" onclick="Relay(15)">Relay15</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+<div id="chart_div0" style="width: 120px; height: 120px;"></div>
+        </td>
+        <td>
+<div id="chart_div1" style="width: 120px; height: 120px;"></div>
+        </td>
+        <tr>
+</table>
+-->
+<div class="column">
+    <div class="card">
+        <table align="center">
+            <tr>
+                <td>
+                    <div id="chart_div0" style="width: 120px; height: 120px;"></div>
+                </td>
+                </tr>
+            <tr>
+                <td>
+                    <button class="button" onclick="Relay(0)">Relay1</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="column">
+    <div class="card">
+        <table align="center">
+            <tr>
+                <td>
+                    <div id="chart_div1" style="width: 120px; height: 120px;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="button" onclick="Relay(1)">Relay2</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="column">
+    <div class="card">
+        <table align="center">
+            <tr>
+                <td>
+                    <div id="chart_div2" style="width: 120px; height: 120px;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="button" onclick="Relay(2)">Relay3</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="column">
+    <div class="card">
+        <table align="center">
+            <tr>
+                <td>
+                    <div id="chart_div3" style="width: 120px; height: 120px;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="button" onclick="Relay(3)">Relay4</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="column">
+    <div class="card">
+        <table align="center">
+            <tr>
+                <td>
+                    <div id="chart_div4" style="width: 120px; height: 120px;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="button" onclick="Relay(4)">Relay5</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="column">
+    <div class="card">
+        <table align="center">
+            <tr>
+                <td>
+                    <div id="chart_div5" style="width: 120px; height: 120px;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="button" onclick="Relay(5)">Relay6</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="column">
+    <div class="card">
+        <table align="center">
+            <tr>
+                <td>
+                    <div id="chart_div6" style="width: 120px; height: 120px;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="button" onclick="Relay(6)">Relay7</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="column">
+    <div class="card">
+        <table align="center">
+            <tr>
+                <td>
+                    <div id="chart_div7" style="width: 120px; height: 120px;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="button" onclick="Relay(7)">Relay8</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="column">
+    <div class="card">
+        <table align="center">
+            <tr>
+                <td>
+                    <div id="chart_div8" style="width: 120px; height: 120px;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="button" onclick="Relay(8)">Relay9</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="column">
+    <div class="card">
+        <table align="center">
+            <tr>
+                <td>
+                    <div id="chart_div9" style="width: 120px; height: 120px;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="button" onclick="Relay(9)">Relay10</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="column">
+    <div class="card">
+        <table align="center">
+            <tr>
+                <td>
+                    <div id="chart_div10" style="width: 120px; height: 120px;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="button" onclick="Relay(10)">Relay11</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="column">
+    <div class="card">
+        <table align="center">
+            <tr>
+                <td>
+                    <div id="chart_div11" style="width: 120px; height: 120px;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="button" onclick="Relay(11)">Relay12</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="column">
+    <div class="card">
+        <table align="center">
+            <tr>
+                <td>
+                    <div id="chart_div12" style="width: 120px; height: 120px;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="button" onclick="Relay(12)">Relay13</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="column">
+    <div class="card">
+        <table align="center">
+            <tr>
+                <td>
+                    <div id="chart_div13" style="width: 120px; height: 120px;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="button" onclick="Relay(13)">Relay14</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="column">
+    <div class="card">
+        <table align="center">
+            <tr>
+                <td>
+                    <div id="chart_div14" style="width: 120px; height: 120px;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="button" onclick="Relay(14)">Relay15</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="column">
+    <div class="card">
+        <table align="center">
+            <tr>
+                <td>
+                    <div id="chart_div15" style="width: 120px; height: 120px;"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button class="button" onclick="Relay(15)">Relay16</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
 
+
+<script> Sensorgauge(0) </script>
+<script> Sensorgauge(1) </script>
+<script> Sensorgauge(2) </script>
+<script> Sensorgauge(3) </script>
+<script> Sensorgauge(4) </script>
+<script> Sensorgauge(5) </script>
+<script> Sensorgauge(6) </script>
+<script> Sensorgauge(7) </script>
+<script> Sensorgauge(8) </script>
+<script> Sensorgauge(9) </script>
+<script> Sensorgauge(10) </script>
+<script> Sensorgauge(11) </script>
+<script> Sensorgauge(12) </script>
+<script> Sensorgauge(13) </script>
+<script> Sensorgauge(14) </script>
+<script> Sensorgauge(15) </script>
    </body>
 </html>
