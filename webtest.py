@@ -25,15 +25,17 @@ controller.turnOnRelay(0,5)
 time.sleep(2)
 controller.cleanup()"""
 
-
+# Getting moisture reading and storing in config.status[].
 def get_reading():
     while True:
         for i in range(0, config.numchip):
             for j in range(0, config.numinputs):
                 config.reading_arr[i*config.numinputs+j] = mcp3008.readadc(j, i)
         config.status["sensorval"] = config.reading_arr
+        # Sleeping to let the thread finnish getting reading.(?)
         time.sleep(0.5)
 
+# Getting reading on new thread(in order to parrallelize.
 try:
     thread = threading.Thread(target=get_reading, args=())
     thread.start()
@@ -70,7 +72,8 @@ try:
         message = json.dumps(config.status)
         return message
 
-    start_server = websockets.serve(handler, '192.168.2.144', 9998)
+    start_server = websockets.serve(handler, '127.0.0.1', 9998)
+    # start_server = websockets.serve(handler, '192.168.2.144', 9998)
     # start_server = websockets.serve(handler, '192.168.1.210',9998)
     # start_server = websockets.serve(handler, '192.168.2.100',9998)
 
