@@ -6,10 +6,15 @@ numchip = 2
 numinputs = 8
 # Number of sensors
 sensorcount = 16
-#array to store sensor readings
+# array to store sensor readings
 reading_arr = [0]*numchip*numinputs
 # Status of sensors and relays
 relayon = [False] * relaycount
 sensorval = [0] * sensorcount
 duration = 2
-status = {"relayon": relayon, "sensorval": sensorval, "duration": duration}
+# scheduled watering active
+onschedule = False
+# Postpone schedule time. seconds
+pptime = 300
+
+status = {"relayon": relayon, "sensorval": sensorval, "duration": duration, "onschedule": onschedule}
