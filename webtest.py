@@ -6,9 +6,12 @@ import config
 import time
 import threading
 import mcp3008
+import time
+from temperature import read_temp
 
 relaycount = 16
 sensorcount = 16
+# BCM pins.(pin 4 for is for thermometer.)
 pinlist = [2, 3, 17, 27, 22, 5, 6, 13, 19, 26, 14, 15, 18, 23, 24, 25, 7, 12]
 
 relayon = [False] * relaycount
@@ -24,6 +27,13 @@ controller.turnOffRelay(0)
 controller.turnOnRelay(0,5)
 time.sleep(2)
 controller.cleanup()"""
+
+# Getting temperature and storing in config.status[].
+temp = read_temp()[0]
+config.status["temperature"] = temp
+print(config.status["temperature"])
+print(config.temperature)
+print(time.strftime("%H:%M %d %b %Y, %a "))
 
 # Getting moisture reading and storing in config.status[].
 def get_reading():
