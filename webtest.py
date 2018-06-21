@@ -12,7 +12,7 @@ from temperature import read_temp
 relaycount = 16
 sensorcount = 16
 # BCM pins.(pin 4 for is for thermometer.)
-pinlist = [2, 3, 17, 27, 22, 5, 6, 13, 19, 26, 14, 15, 18, 23, 24, 25, 7, 12]
+pinlist = [2, 3, 27, 22, 0, 5, 6, 13, 26, 14, 15, 23, 24, 25, 1, 12]
 
 relayon = [False] * relaycount
 sensorval = [0] * sensorcount
