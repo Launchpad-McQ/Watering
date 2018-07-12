@@ -15,7 +15,7 @@ function WebSocketTest()
         // Let us open a web socket
         //ws = new WebSocket("ws://laser.xkz.se:9998");
 //        ws = new WebSocket("ws://192.168.2.144:9998");
-        ws = new WebSocket("ws://127.0.0.1:9998");
+       ws = new WebSocket("ws://192.168.1.202:9998");
         //ws = new WebSocket("ws://192.168.1.210:9998");
                         
         // does this when web socket is opened.
