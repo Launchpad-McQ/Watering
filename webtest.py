@@ -7,7 +7,8 @@ import time
 import threading
 import mcp3008
 import time
-from temperature import read_temp
+import RPi.GPIO as GPIO
+#from temperature import read_temp
 
 relaycount = 16
 sensorcount = 16
@@ -27,16 +28,20 @@ controller.turnOffRelay(0)
 controller.turnOnRelay(0,5)
 time.sleep(2)
 controller.cleanup()"""
-
+"""
 # Getting temperature and storing in config.status[].
 temp = read_temp()[0]
 config.status["temperature"] = temp
 print(config.status["temperature"])
 print(config.temperature)
 print(time.strftime("%H:%M %d %b %Y, %a "))
-
+"""
 # Getting moisture reading and storing in config.status[].
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(16, GPIO.OUT)
 def get_reading():
+    GPIO.output(16, GPIO.HIGH)
+    time.sleep(0.1)
     while True:
         for i in range(0, config.numchip):
             for j in range(0, config.numinputs):
@@ -44,8 +49,9 @@ def get_reading():
         config.status["sensorval"] = config.reading_arr
         # Sleeping to let the thread finnish getting reading.(?)
         time.sleep(0.5)
+    GPIO.output(16, GPIO.LOW)
 
-# Getting reading on new thread(in order to parrallelize.
+# Getting reading on new thread(in order to parrallelize).
 try:
     thread = threading.Thread(target=get_reading, args=())
     thread.start()
@@ -82,7 +88,8 @@ try:
         message = json.dumps(config.status)
         return message
 
-    start_server = websockets.serve(handler, '127.0.0.1', 9998)
+    start_server = websockets.serve(handler, '192.168.1.202',9998)
+    #start_server = websockets.serve(handler, '127.0.0.1', 9998)
     # start_server = websockets.serve(handler, '192.168.2.144', 9998)
     # start_server = websockets.serve(handler, '192.168.1.210',9998)
     # start_server = websockets.serve(handler, '192.168.2.100',9998)
